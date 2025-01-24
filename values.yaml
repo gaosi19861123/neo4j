@@ -6,16 +6,35 @@ neo4j:
   # 使用 Secret 作为密码来源
   passwordFromSecret: "neo4j-auth-secret"
 
-# 资源配置
-resources:
-  cpu: "1"
-  memory: "4Gi"
+  # 资源配置
+  resources:
+    requests:
+      cpu: "1"
+      memory: "4Gi"
+    limits:
+      cpu: "1"
+      memory: "4Gi"
 
-# 存储配置  
+# 存储配置
 volumes:
   data:
-    mode: "defaultStorageClass"
-    size: "10Gi"
+    mode: "dynamic"
+    dynamic:
+      storageClassName: "default"
+      accessModes: ["ReadWriteOnce"]
+      requests:
+        storage: "100Gi"
+  logs:
+    mode: "dynamic"
+    dynamic:
+      storageClassName: "default"
+      accessModes: ["ReadWriteOnce"]
+      requests:
+        storage: "20Gi"
+  backups:
+    mode: "share"
+    share:
+      name: "data"
 
 # 服务配置
 services:

@@ -29,8 +29,17 @@ Secret 配置文件包含了 Neo4j 的认证信息：
   - CPU: 1 核
   - 内存: 4Gi
 - 存储配置：
-  - 使用默认存储类
-  - 存储大小：10Gi
+  - 数据卷（data）：
+    - 模式：动态供应（dynamic）
+    - 容量：100Gi
+    - 访问模式：ReadWriteOnce
+  - 日志卷（logs）：
+    - 模式：动态供应（dynamic）
+    - 容量：20Gi
+    - 访问模式：ReadWriteOnce
+  - 备份卷（backups）：
+    - 模式：共享（share）
+    - 共享数据卷
 - 服务配置：
   - 类型：LoadBalancer
   - 端口：
