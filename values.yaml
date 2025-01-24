@@ -9,11 +9,11 @@ neo4j:
   # 资源配置
   resources:
     requests:
-      cpu: "1"
-      memory: "4Gi"
+      cpu: "4"
+      memory: "16Gi"
     limits:
-      cpu: "1"
-      memory: "4Gi"
+      cpu: "6"
+      memory: "24Gi"
 
 # 存储配置
 volumes:
@@ -23,7 +23,7 @@ volumes:
       storageClassName: "default"
       accessModes: ["ReadWriteOnce"]
       requests:
-        storage: "100Gi"
+        storage: "200Gi"
   logs:
     mode: "dynamic"
     dynamic:
