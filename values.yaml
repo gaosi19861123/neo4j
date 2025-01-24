@@ -1,6 +1,10 @@
 neo4j:
-  name: "my-neo4j"
+  name: "neo4j-release"
   edition: "community"
+  namespace: "neo4j-system"
+  
+  # 使用 Secret 作为密码来源
+  passwordFromSecret: "neo4j-auth-secret"
 
 # 资源配置
 resources:
@@ -17,18 +21,19 @@ volumes:
 services:
   neo4j:
     enabled: true
-    annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: "false"
+    annotations: {}
     spec:
       type: LoadBalancer
-      loadBalancerIP: ""
-    ports:
-      http:
-        enabled: true
-      https:
-        enabled: false  
-      bolt:
-        enabled: true
+      ports:
+        http:
+          port: 7474
+          enabled: true
+        https:
+          port: 7473
+          enabled: false
+        bolt:
+          port: 7687
+          enabled: true
 
 # 集群配置
 config:
